@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>07_component_refs</title>
+</head>
+<body>
+<br>
+  <div id="example"></div>
+
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    /*
+    需求: 自定义组件, 功能说明如下:
+      1. 界面如果页面所示
+      2. 点击按钮, 提示第一个输入框中的值
+      3. 当第2个输入框失去焦点时, 提示这个输入框中的值
+   */
+    class MyComponent extends React.Component{
+
+        hintInput = () => {
+            //找到input
+            alert(this.contentInput.value)
+        }
+
+        hintInput2 =(event) =>{
+            alert(event.target.value)
+        }
+
+        render(){
+            return(
+                <div>
+                    /*自动调用ref指定的函数，并将当前DOM元素对象传入*/
+                    <input type="text" ref={input => this.contentInput = input}/> &nbsp;&nbsp;
+                    <button onClick={this.hintInput}>提示输入</button> &nbsp;&nbsp;
+                    <input type="text" placeholder="失去焦点提示" onBlur={this.hintInput2}/>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<MyComponent/>,document.getElementById('example'))
+  </script>
+</body>
+</html>

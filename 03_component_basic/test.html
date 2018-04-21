@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>03_component_basic</title>
+</head>
+<body>
+
+  <div id="example1"></div>
+  <div id="example2"></div>
+
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+      //1.定义组件
+      /*方式一：工厂函数组件(简单组件)*/
+      function MyComponent1() {  //工厂函数名就是组建标签名
+          return <h1>工厂函数组件(简单组件)</h1>
+      }
+      /*方式二：ES6类组件(复杂组件)*/
+      class MyComponent2 extends React.Component{  //组建类/构造函数
+          //重写render方法
+          render(){
+              console.log('render',this,this instanceof MyComponent2)
+              return <h1>ES6类组件(复杂组件)</h1>
+          }
+      }
+      //2.渲染组件标签
+      ReactDOM.render(<MyComponent1/>,document.getElementById('example1'));
+      ReactDOM.render(<MyComponent2/>,document.getElementById('example2'));
+  </script>
+</body>
+</html>

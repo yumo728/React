@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>05_components_composing</title>
+</head>
+<body>
+<!--
+1. 拆分组件
+2. 实现静态组件: 静态页面效果
+3. 实现动态组件
+  1). 动态显示初始化数据
+    a. 设计初始化数据:
+      类型/名称   数组/todos
+      在APP组件中  （是哪个组件（自身）需要还是哪些组件(父)需要）
+    b.指定初始化数据，并显示
+  2). 交互
+    a.给特定标签绑定特定时间监听
+    b.在时间回调函数中处理并更新数据
+
+注意：状态在哪个组件，更新状态的行为（函数）应该定义在哪个组件
+-->
+  <div id="example"></div>
+
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/prop-types.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+  <script type="text/babel">
+    //整个应用的组件
+    class App extends React.Component{
+        state = {
+            todos:['a','b','c']
+        }
+
+        addTodo= (todo) => {
+            //获取原状态数据
+            const {todos} = this.state
+            //更新数据
+            todos.unshift(todo)
+            //更新状态
+            this.setState({
+                todos
+            })
+        }
+
+
+
+        render(){
+            const todos = this.state.todos
+            return(
+                <div>
+                    <Add addTodo={this.addTodo} todoSize={todos.length}/>
+                    <List todos={todos}/>
+                </div>
+            )
+        }
+    }
+    //添加的组件
+    class Add extends React.Component{
+
+        static propTypes = {
+            addTodo:PropTypes.func.isRequired,
+            todoSize:PropTypes.number.isRequired
+        }
+
+        addTodo = () =>{  //将todo添加到todos中
+            //获取输入的todo
+            const todo = this.refs.inputTodo.value.trim()
+            //检查todo的合法性
+            if(!todo){
+                alert('必须输入')
+                return
+            }
+            //添加到todos中显示
+            this.props.addTodo(todo)
+            //清除输入
+            this.refs.inputTodo.value = ''
+        }
+
+        render(){
+            return(
+                <div>
+                    <input type="text" ref="inputTodo"/>
+                    <button onClick={this.addTodo}>Add #{this.props.todoSize}</button>
+                </div>
+            )
+        }
+    }
+    //列表的组件
+    class List extends React.Component{
+        static propTypes = {
+            todos:PropTypes.array.isRequired
+        }
+        render(){
+            const {todos} = this.props
+            return(
+                <ul>
+                    {
+                        todos.map((todo,index)=>{
+                          return <li key={index}>{todo}</li>
+                        })
+                    }
+                </ul>
+            )
+        }
+    }
+
+    ReactDOM.render(<App/>,document.getElementById('example'))
+  </script>
+</body>
+</html>

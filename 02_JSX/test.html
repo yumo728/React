@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>02_JSX</title>
+</head>
+<body>
+  <div id="test1"></div>
+  <div id="test2"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript">
+        //创建虚拟DOM元素
+        const vDom1 = React.createElement('h1',{id:'myId'},'你使用的是纯js')
+        //渲染虚拟DOM
+        ReactDOM.render(vDom1,document.getElementById('test1'))
+        // <h1 id="myId">你使用的是纯js</h1>
+    </script>
+    <script type="text/babel">
+        let myId = 'yumo'
+        let text = '你使用的是jsx';
+        //创建虚拟DOM元素
+        const vDom2 = <h1 id={myId}>{text}</h1>
+        //渲染虚拟DOM
+        ReactDOM.render(vDom2,document.getElementById('test2'))
+        // <h1 id="yumo">你使用的是jsx</h1>
+    </script>
+
+</body>
+</html>
