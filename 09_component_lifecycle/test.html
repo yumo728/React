@@ -17,6 +17,34 @@
     2. 切换时间为2S
     3. 点击按钮从界面中移除组件界面
    */
+    class Anmation extends React.Component{
+        state = {
+            opacity:1
+        }
+
+        constructor(props){
+            super(props)
+        }
+
+        componentDidMount(){
+            setInterval({
+
+            },200)
+        }
+
+        render(){
+            return(
+                <div>
+                    <h2></h2>
+                    <button>不活了</button>
+                </div>
+            )
+        }
+    }
+    const text = 'react学不会，不活了';
+
+    ReactDOM.render(<Anmation text={text}/>,document.getElementById('example'))
+
 </script>
 </body>
 </html>

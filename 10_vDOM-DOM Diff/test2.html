@@ -17,25 +17,25 @@
   虚拟DOM+DOM Diff算法: 最小化页面重绘
   */
 
-  class HelloWorld extends React.Component{
-      constructor (props) {
+  class HelloReat extends React.Component{
+
+      constructor(props){
           super(props)
           this.state = {
               date:new Date()
           }
       }
 
-      componentDidMount () {
-          setInterval(() => {
-              this.setState({
-                  date: new Date()
-              })
-          }, 1000)
+      componentDidMount(){
+          setInterval(()=>{
+            this.setState({
+                date:new Date()
+            })
+          },1000)
       }
 
       render(){
-          console.log('111111')
-          return (
+          return(
               <p>
                   Hello:<input type="text" placeholder="your name"/>!&nbsp;
                   <span>It is {this.state.date.toTimeString()}</span>
@@ -44,7 +44,8 @@
       }
   }
 
-  ReactDOM.render(<HelloWorld/>,document.getElementById('example'))
+    ReactDOM.render(<HelloReat/>,document.getElementById('example'))
+
 
 </script>
 </body>

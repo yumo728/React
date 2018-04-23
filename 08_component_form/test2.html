@@ -20,25 +20,45 @@
 
     class From extends React.Component{
 
+        state = {
+            name : 'abc',
+            pwd : '123'
+        }
+
         submit=(event)=>{
             //阻止事件的默认行为(不会自动提交表单)
             event.preventDefault()
 
             //得到输入的数据
-            const name = this.nameInput.value
-            const pwd = this.pwdInput.value
+            const {name,pwd} = this.state
 
             //提示
             alert(`要提交的用户名：${name},密码：${pwd}`)
         }
 
+        handleNameChange = (event) => {
+            const name = event.target.value
+            //更新状态
+            this.setState({
+                name
+            })
+        }
+
+        handlePwdChange = (event) => {
+            const pwd = event.target.value
+            //更新状态
+            this.setState({
+                pwd
+            })
+        }
 
         render(){
+            const {name,pwd} = this.state
             return(
                 <div>
                     <from>
-                        用户名：<input type="text" ref={(input)=>{this.nameInput = input}}/>
-                        密码：<input type="password" ref={(input)=>{this.pwdInput = input}}/>
+                        用户名：<input type="text" value={name} onChange={this.handleNameChange}/>
+                        密码：<input type="password" value={pwd} onChange={this.handlePwdChange}/>
                         <input type="submit" value="提交" onClick={this.submit}/>
                     </from>
                 </div>
